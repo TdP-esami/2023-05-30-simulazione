@@ -110,4 +110,31 @@ public class GOsalesDAO {
 	}
 	
 	
+	
+	/**
+	 * Metodo che legge le nazioni in cui si trovano i rivenditori
+	 * @return
+	 */
+	public List<String> getNazioni(){
+		String query = "Select Distinct r.Country "
+				+ "FROM go_retailers r";
+		List<String> result = new ArrayList<String>();
+
+		try {
+			Connection conn = DBConnect.getConnection();
+			PreparedStatement st = conn.prepareStatement(query);
+			ResultSet rs = st.executeQuery();
+
+			while (rs.next()) {
+				result.add( rs.getString("Country") );
+			}
+			conn.close();
+			return result;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("Errore connessione al database");
+			throw new RuntimeException("Error Connection Database");
+		}
+	}
+	
 }

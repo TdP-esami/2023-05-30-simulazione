@@ -176,7 +176,7 @@ public class Products {
 	
 	@Override
 	public String toString() {
-		return "Prodotto " + number + ": " + product;
+		return "Prodotto " + number + ": " + product + " " + color;
 	}
 	
 
