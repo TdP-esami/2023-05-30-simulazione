@@ -126,7 +126,7 @@ public class Products {
 	/**
 	 * @return the unit_cost
 	 */
-	public double isUnit_cost() {
+	public double getUnit_cost() {
 		return unit_cost;
 	}
 	
@@ -142,7 +142,7 @@ public class Products {
 	/**
 	 * @return the unit_price
 	 */
-	public double isUnit_price() {
+	public double getUnit_price() {
 		return unit_price;
 	}
 	

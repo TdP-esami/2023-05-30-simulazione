@@ -5,10 +5,12 @@ import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 
-
+import it.polito.tdp.gosales.model.ArcoExt;
 import it.polito.tdp.gosales.model.Model;
 import it.polito.tdp.gosales.model.Products;
 import it.polito.tdp.gosales.model.Retailers;
+import it.polito.tdp.gosales.model.SimulationResult;
+import it.polito.tdp.gosales.model.StatsConnessa;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -94,32 +96,31 @@ public class FXMLController {
     	
     	
     	//creazione grafp.
-//    	this.model.creaGrafo(nazione, anno, nMin);
+    	this.model.creaGrafo(nazione, anno, nMin);
     	
-
-//    	List<Retailers> vertici = this.model.getVertici();
-//    	Collections.sort(vertici);
-//    	this.txtResult.setText("Grafo creato, con " + vertici.size() + " vertici e " + this.model.getNArchi()+ " archi\n");
+    	List<Retailers> vertici = this.model.getVertici();
+    	Collections.sort(vertici);
+    	this.txtResult.setText("Grafo creato, con " + vertici.size() + " vertici e " + this.model.getNArchi()+ " archi\n");
     	
     	//Stampa dei vertici
-//    	this.txtVertici.clear();
-//    	for(Retailers r : vertici) {
-//    		this.txtVertici.appendText(r + "\n");
-//    	}
-//    	
+    	this.txtVertici.clear();
+    	for(Retailers r : vertici) {
+    		this.txtVertici.appendText(r + "\n");
+    	}
+    	
     	
     	//Stampa degli archi
-//    	List<ArcoExt> archi = this.model.getArchi();
-//    	Collections.sort(archi);
-//    	this.txtArchi.clear();
-//    	for(ArcoExt a : archi) {
-//    		this.txtArchi.appendText(a.getWeight() + ": " + a.getR1() + " <-> " + a.getR2() + "\n");
-//    	}
+    	List<ArcoExt> archi = this.model.getArchi();
+    	Collections.sort(archi);
+    	this.txtArchi.clear();
+    	for(ArcoExt a : archi) {
+    		this.txtArchi.appendText(a.getPeso() + ": " + a.getR1() + " <-> " + a.getR2() + "\n");
+    	}
     	
     	//popolare la combo box del rivenditore
-//    	this.cmbRivenditore.getItems().clear();
-//    	this.cmbRivenditore.getItems().addAll(vertici);
-//    	
+    	this.cmbRivenditore.getItems().clear();
+    	this.cmbRivenditore.getItems().addAll(vertici);
+    	
 //    	//abilita i vari controlli della gui
     	this.cmbRivenditore.setDisable(false);
     	this.btnAnalizzaComponente.setDisable(false);
@@ -148,14 +149,14 @@ public class FXMLController {
     	}
     	
     	//analizza la componente connessa
-//    	ComponenteStats result = this.model.analizzaComponente(r);
-//    	this.txtResult.appendText("\nLa componente connessa di " + r + " ha dimensione " + result.getDimensione()+"\n");
-//    	this.txtResult.appendText("Il peso totale degli archi della componente connessa è " +  result.getPesiTot()+"\n");
+    	StatsConnessa result = this.model.analizzaComponente(r);
+    	this.txtResult.appendText("\nLa componente connessa di " + r + " ha dimensione " + result.getRetailers().size()+ "\n");
+    	this.txtResult.appendText("Il peso totale degli archi della componente connessa è " +  result.getPeso()+"\n");
     	
     	
     	//Popolare la combo box dei prodotti
-//    	this.cmbProdotto.getItems().clear();
-//    	this.cmbProdotto.getItems().addAll(this.model.getProductsRetailerYear(r, anno));
+    	this.cmbProdotto.getItems().clear();
+    	this.cmbProdotto.getItems().addAll(this.model.getProductsRetailerYear(r, anno));
     	
     	//Abilitare i controlli della gui
     	this.cmbProdotto.setDisable(false);
@@ -165,6 +166,8 @@ public class FXMLController {
     	this.txtN.clear();
     	this.txtQ.clear();
     }
+    
+    
     
     
     @FXML
@@ -205,9 +208,9 @@ public class FXMLController {
     	}
     	
     	
-//    	SimulationResult  res = this.model.eseguiSimulazione(p, q, n, r, anno);
-//    	this.txtResult.setText("Simulazione eseguita. Il risultato è\n");
-//    	this.txtResult.appendText(res + "\n");
+    	SimulationResult res = this.model.eseguiSimulazione(p, q, n, r, anno);
+    	this.txtResult.setText("Simulazione eseguita. Il risultato è\n");
+    	this.txtResult.appendText(res + "\n");
     }
     
     
